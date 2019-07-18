@@ -6,7 +6,7 @@ import logger from 'morgan';
 require('dotenv').config()
 
 import connectDB from './config/connectDB';
-
+import configViewEngine from './config/viewEngine';
 import indexRouter from './routes/index';
 
 let app = express();
@@ -14,15 +14,16 @@ let app = express();
 // connect to mongoDB
 connectDB();
 
+configViewEngine(app);
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
