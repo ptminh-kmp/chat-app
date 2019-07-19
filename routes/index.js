@@ -1,13 +1,19 @@
 import express from 'express';
+import { home, auth } from '../controllers/index';
+
 let router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  return res.render('main/master');
-});
+/**
+ * Init all routes
+ * @param app from exactly express module
+ */
+let initRoutes = (app) => {
+  router.get('/', home.getHome);
+  router.get('/login-register', auth.getLoginRegister);
+  router.get('/logout', auth.getLogout);
 
-router.get('/login-register', (req, res) => {
-  return res.render('auth/loginRegister');
-});
+  return app.use('/', router);
+};
 
-module.exports = router;
+
+module.exports = initRoutes;
