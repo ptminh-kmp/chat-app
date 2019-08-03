@@ -3,7 +3,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectFlash from 'connect-flash';
-import bodyParser from 'body-parser';
 require('dotenv').config()
 
 import connectDB from './config/connectDB';
@@ -24,7 +23,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(connectFlash());
 
