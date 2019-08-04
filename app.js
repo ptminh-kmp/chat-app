@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectFlash from 'connect-flash';
-require('dotenv').config()
+import dotenv from 'dotenv';
 
 import connectDB from './config/connectDB';
 import configViewEngine from './config/viewEngine';
@@ -12,6 +12,7 @@ import configSession from './config/session';
 
 let app = express();
 
+dotenv.config();
 // connect to mongoDB
 connectDB();
 
