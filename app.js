@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectFlash from 'connect-flash';
 import dotenv from 'dotenv';
+import passport from 'passport';
 
 import connectDB from './config/connectDB';
 import configViewEngine from './config/viewEngine';
@@ -26,6 +27,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(connectFlash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 initRoutes(app);
 
