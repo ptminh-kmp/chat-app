@@ -11,6 +11,9 @@
 import app from '../app';
 import debugLib from 'debug';
 import http from 'http';
+import https from 'https';
+import fs from 'fs';
+
 const debug = debugLib('chat-app:server');
 
 /**
@@ -24,7 +27,12 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+// var server = http.createServer(app);
+var server = https.createServer({
+  key: fs.readFileSync(__dirname + '\\..\\cert\\server.key'),
+  cert: fs.readFileSync(__dirname + '\\..\\cert\\server.crt'),
+  passphrase: 'ptMinh93'
+} ,app);
 
 /**
  * Listen on provided port, on all network interfaces.
