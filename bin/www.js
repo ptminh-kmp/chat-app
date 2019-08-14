@@ -27,12 +27,12 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-// var server = http.createServer(app);
-var server = https.createServer({
-  key: fs.readFileSync(__dirname + '\\..\\cert\\server.key'),
-  cert: fs.readFileSync(__dirname + '\\..\\cert\\server.crt'),
-  passphrase: 'ptMinh93'
-} ,app);
+var server = http.createServer(app);
+// var server = https.createServer({
+//   key: fs.readFileSync(__dirname + '\\..\\cert\\server.key'),
+//   cert: fs.readFileSync(__dirname + '\\..\\cert\\server.crt'),
+//   passphrase: 'ptMinh93'
+// } ,app);
 
 /**
  * Listen on provided port, on all network interfaces.
