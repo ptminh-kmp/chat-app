@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from "passport";
-import { home, auth } from '../controllers/index';
+import { home, auth, task } from '../controllers/index';
 import { authValid } from '../validation/index';
 import initPassportLocal from '../controllers/passportController/local';
 import initPassportFacebook from '../controllers/passportController/facebook';
@@ -38,6 +38,7 @@ let initRoutes = (app) => {
     successRedirect: '/',
     failureRedirect: '/login-register'
   }));
+  router.get('/task', auth.checkLoggedIn, task.getTask);
 
   return app.use('/', router);
 };
