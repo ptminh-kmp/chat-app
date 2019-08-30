@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from "passport";
-import { home, auth, task } from '../controllers/index';
+import { home, auth, task, user } from '../controllers/index';
 import { authValid } from '../validation/index';
 import initPassportLocal from '../controllers/passportController/local';
 import initPassportFacebook from '../controllers/passportController/facebook';
@@ -39,6 +39,7 @@ let initRoutes = (app) => {
     failureRedirect: '/login-register'
   }));
   router.get('/task', auth.checkLoggedIn, task.getTask);
+  router.put('/user/update-avatar', auth.checkLoggedIn, user.updateAvatar);
 
   return app.use('/', router);
 };
