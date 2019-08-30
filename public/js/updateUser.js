@@ -6,19 +6,19 @@ function updateUserInfo() {
     $('#input-change-avatar').bind('change', function() {
         let fileData = $(this).prop('files')[0];
         let match = ['image/png', 'image/jpg', 'image/hpeg'];
-        let limit = 20148576;
+        let limit = 10148576;
 
-        if ($.inArray(fileData.type, match) === -1) {
-            alertify.notify('Kiểu phải không hợp lệ.', 'error', 7);
-            $(this).val(null);
-            return false;
-        }
+        // if ($.inArray(fileData.type, match) === -1) {
+        //     alertify.notify('Kiểu file không hợp lệ.', 'error', 7);
+        //     $(this).val(null);
+        //     return false;
+        // }
 
-        if (fileData.size > limit) {
-            alertify.notify('Ảnh upload tối đa cho phép là 1 Mb', 'error', 7);
-            $(this).val(null);
-            return false;
-        }
+        // if (fileData.size > limit) {
+        //     alertify.notify('Ảnh upload tối đa cho phép là 1 Mb', 'error', 7);
+        //     $(this).val(null);
+        //     return false;
+        // }
 
         if (typeof(FileReader) != 'undefined') {
             let imagePreview = $('#image-edit-profile');
@@ -86,20 +86,29 @@ $(document).ready(function() {
             processData: false,
             data: userAvatar,
             success: function(result) {
-                //
+                $('.user-modal-alert-success').find('span').text(result.message);
+                $('.user-modal-alert-success').css('display', 'block');
+
+                $('#navbar-avatar').attr('src', result.imageSrc);
+
+                originAvatarSrc = result.imageSrc;
+
+                $('#input-btn-cancel-user').click();
             },
             error: function(error) {
-                //
+                // Display errors
+                $('.user-modal-alert-error').find('span').text(error.responseText);
+                $('.user-modal-alert-error').css('display', 'block');
+
+                $('#input-btn-cancel-user').click();
             }
         });
-
-        // console.log(userAvatar);
-        // console.log(userInfo);
     });
 
     $('#input-btn-cancel-user').bind('click', function() {
         userAvatar = null;
         userInfo = {};
+        $('#input-change-avatar').val(null);
         $('#user-modal-avatar').attr('src', originAvatarSrc);
     });
 });
