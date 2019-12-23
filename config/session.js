@@ -1,11 +1,9 @@
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 let MongoStore = connectMongo(session);
-let mongoURL = `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+let mongoURL = `${process.env.DB_URI}`;
+// let mongoURL = `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 /**
  * This variable is where save session, in this case is MongoDb
  */

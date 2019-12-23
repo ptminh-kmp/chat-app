@@ -1,9 +1,7 @@
-import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectFlash from 'connect-flash';
-import dotenv from 'dotenv';
 import passport from 'passport';
 
 import connectDB from './config/connectDB';
@@ -13,7 +11,6 @@ import configSession from './config/session';
 
 let app = express();
 
-dotenv.config();
 // connect to mongoDB
 connectDB();
 
@@ -49,4 +46,8 @@ initRoutes(app);
 //   res.render('error');
 // });
 
-module.exports = app;
+// module.exports = app;
+
+app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
+    console.log(`Running at ${process.env.APP_HOST}:${process.env.APP_PORT}/`);
+})

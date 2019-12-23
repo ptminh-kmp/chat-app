@@ -1,11 +1,8 @@
 import passport from 'passport';
 import passportFacebook from 'passport-facebook';
-import dotenv from 'dotenv';
 
 import { transErrors, transSuccess } from '../../lang/vi';
 import UserModel from '../../models/userModel';
-
-dotenv.config();
 
 let FacebookStrategy = passportFacebook.Strategy;
 let fbAppId = process.env.FB_APP_ID;

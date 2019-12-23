@@ -1,11 +1,8 @@
 import passport from 'passport';
 import passportGoogle from 'passport-google-oauth';
-import dotenv from 'dotenv';
 
 import { transErrors, transSuccess } from '../../lang/vi';
 import UserModel from '../../models/userModel';
-
-dotenv.config();
 
 let GoogleStrategy = passportGoogle.OAuth2Strategy;
 let ggAppId = process.env.GG_APP_ID;

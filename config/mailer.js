@@ -1,7 +1,4 @@
 import nodeMailer from 'nodemailer';
-import dotenv from 'dotenv';
-
-dotenv.config()
 
 let adminEmail = process.env.MAIL_USER;
 let adminPassword = process.env.MAIL_PASSWORD;
