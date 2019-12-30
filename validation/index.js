@@ -4,4 +4,4 @@ import contactValidation from './contactValidation';
 
 export const authValid = authValidation;
 export const userValid = userValidation;
-export const contactValidation = contactValidation;
+export const contactValid = contactValidation;
