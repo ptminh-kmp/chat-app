@@ -5,6 +5,10 @@ export DB_URI='mongodb+srv://minhpt:ptMinh93@bravo-server-f7avs.gcp.mongodb.net/
 export APP_HOST=localhost
 export APP_PORT=8017
 
+# Config session key and secret
+export SESSION_KEY='express.sid'
+export SESSION_SECRET='mySecret'
+
 # Config admin email account
 export MAIL_USER=minh.excellent@gmail.com
 export MAIL_PASSWORD=ptMinh1993
