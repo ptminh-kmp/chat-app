@@ -3,18 +3,26 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectFlash from 'connect-flash';
 import passport from 'passport';
+import http from 'http';
+import socketio from 'socket.io';
+import initSockets from './sockets/index';
 
 import connectDB from './config/connectDB';
 import configViewEngine from './config/viewEngine';
 import initRoutes from './routes/index';
-import configSession from './config/session';
+import session from './config/session';
+import configSocketIo from './config/socketio';
 
 let app = express();
+
+// Init server with socket.io and express
+let server = http.createServer(app);
+let io = socketio(server);
 
 // connect to mongoDB
 connectDB();
 
-configSession(app);
+session.config(app);
 
 configViewEngine(app);
 
@@ -29,6 +37,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 initRoutes(app);
+
+configSocketIo(io, cookieParser, session.sessionStore);
+
+initSockets(io);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -48,6 +60,6 @@ initRoutes(app);
 
 // module.exports = app;
 
-app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
+server.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
     console.log(`Running at ${process.env.APP_HOST}:${process.env.APP_PORT}/`);
 })
